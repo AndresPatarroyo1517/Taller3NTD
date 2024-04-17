@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router(); 
+const router = express.Router();
 const walletSchema = require("../models/e-wallet");
 
 router.post("/wallets", (req, res) => {
@@ -10,23 +10,23 @@ router.post("/wallets", (req, res) => {
         .catch((error) => res.json({ message: error }));
 });
 router.get("/wallets", (req, res) => {
-    animalSchema.find()
+    walletSchema.find()
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 })
 
 router.get("/wallets/:id", (req, res) => {
     const { id } = req.params;
-    animalSchema.findById(id)
+    walletSchema.findById(id)
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 })
 
 router.put("/wallets/:id", (req, res) => {
     const { id } = req.params;
-    const { nombre, edad, tipo, fecha } = req.body;
-    animalSchema.updateOne({ _id: id }, {
-        $set: { nombre, edad, tipo, fecha }
+    const { usuario, correoElectronico, saldo, historialTransacciones, tarjetasAsociadas, direccionEnvio } = req.body;
+    walletSchema.updateOne({ _id: id }, {
+        $set: { usuario, correoElectronico, saldo, historialTransacciones, tarjetasAsociadas, direccionEnvio }
     })
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
@@ -34,7 +34,7 @@ router.put("/wallets/:id", (req, res) => {
 
 router.delete("/wallets/:id", (req, res) => {
     const { id } = req.params;
-    animalSchema.findByIdAndDelete(id)
+    walletSchema.findByIdAndDelete(id)
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 })
